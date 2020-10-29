@@ -29,7 +29,7 @@ public class NewOrderMain {
         var producer = new KafkaProducer<String, String>(properties());
 
         for (var i=0; i < 100; i++) {
-            var key = UUID.randomUUID().toString();
+            var key = UUID.randomUUID().toString(); //A chave é usada para distribuir a mensagem entre as partições existentes e consequentemente entre as instâncias de um serviço dentro de um consumer group.
             var value = "132123,67523,7894589745";
             var record = new ProducerRecord<String, String>("ECOMMERCE_NEW_ORDER", key, value);
             Callback callback = (data, ex) -> {
