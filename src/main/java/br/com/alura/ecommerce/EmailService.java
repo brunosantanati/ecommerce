@@ -8,7 +8,8 @@ public class EmailService {
         var emailService = new EmailService();
         var service = new KafkaService(EmailService.class.getSimpleName(),
                 "ECOMMERCE_SEND_EMAIL",
-                emailService::parse);
+                //emailService::parse);
+                c -> emailService.parse(c)); //doc sobre method reference: https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
         service.run();
     }
 
