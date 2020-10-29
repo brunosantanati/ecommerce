@@ -36,6 +36,7 @@ public class LogService {
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, LogService.class.getSimpleName());
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1"); //dar a oportunidade de commits mais recorrentes
         return properties;
     }
 

@@ -45,6 +45,7 @@ public class FraudDetectorService {
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, FraudDetectorService.class.getSimpleName());
         properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG,
                 FraudDetectorService.class.getSimpleName() + "-" + UUID.randomUUID().toString());
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1"); //dar a oportunidade de commits mais recorrentes
         return properties;
     }
 
