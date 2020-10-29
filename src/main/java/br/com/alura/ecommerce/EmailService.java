@@ -9,8 +9,14 @@ public class EmailService {
         var service = new KafkaService(EmailService.class.getSimpleName(),
                 "ECOMMERCE_SEND_EMAIL",
                 //emailService::parse);
-                c -> emailService.parse(c)); //doc sobre method reference: https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
-        service.run();
+                //c -> emailService.parse(c)); //doc sobre method reference: https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
+                new ConsumerFunction() {
+                    @Override
+                    public void consume(ConsumerRecord<String, String> c) {
+                        emailService.parse(c);
+                    }
+                });
+                service.run();
     }
 
     private void parse(ConsumerRecord<String, String> record){
