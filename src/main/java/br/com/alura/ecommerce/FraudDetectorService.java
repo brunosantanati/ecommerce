@@ -25,7 +25,7 @@ public class FraudDetectorService {
                     System.out.println(record.partition());
                     System.out.println(record.offset());
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         //ignoring
                         e.printStackTrace();
