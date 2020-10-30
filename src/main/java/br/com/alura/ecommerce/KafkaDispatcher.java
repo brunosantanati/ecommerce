@@ -6,10 +6,11 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
+import java.io.Closeable;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-class KafkaDispatcher {
+class KafkaDispatcher implements Closeable {
 
     private final KafkaProducer<String, String> producer;
 
@@ -36,5 +37,10 @@ class KafkaDispatcher {
                     + data.partition() + " / offset " + data.offset() + " / timestamp " + data.timestamp());
         };
         producer.send(record, callback).get();
+    }
+
+    @Override
+    public void close() {
+        producer.close();
     }
 }

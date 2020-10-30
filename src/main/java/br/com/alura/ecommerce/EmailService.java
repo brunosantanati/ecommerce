@@ -6,22 +6,23 @@ public class EmailService {
 
     public static void main(String[] args) {
         var emailService = new EmailService();
-        var service = new KafkaService(EmailService.class.getSimpleName(),
+        try(var service = new KafkaService(EmailService.class.getSimpleName(),
                 "ECOMMERCE_SEND_EMAIL",
                 //USANDO METHOD REFERENCE
-                emailService::parse);
+                emailService::parse)) {
 
                 //USANDO LAMBDA
-                //c -> emailService.parse(c)); //doc sobre method reference: https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
+                //c -> emailService.parse(c))){ //doc sobre method reference: https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
 
                 //USANDO CLASSE ANONIMA
-                /*new ConsumerFunction() {
-                    @Override
-                    public void consume(ConsumerRecord<String, String> c) {
-                        emailService.parse(c);
-                    }
-                });*/
-                service.run();
+                    /*new ConsumerFunction() {
+                        @Override
+                        public void consume(ConsumerRecord<String, String> c) {
+                            emailService.parse(c);
+                        }
+                    })){*/
+            service.run();
+        }
     }
 
     private void parse(ConsumerRecord<String, String> record){
