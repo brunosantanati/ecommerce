@@ -2,6 +2,8 @@ package br.com.alura.ecommerce;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
+import java.util.Map;
+
 public class EmailService {
 
     public static void main(String[] args) {
@@ -10,7 +12,8 @@ public class EmailService {
                 "ECOMMERCE_SEND_EMAIL",
                 //USANDO METHOD REFERENCE
                 emailService::parse,
-                String.class)) {
+                String.class,
+                Map.of())) {
 
                 //USANDO LAMBDA
                 //c -> emailService.parse(c))){ //doc sobre method reference: https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
