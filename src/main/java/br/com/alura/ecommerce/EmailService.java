@@ -9,7 +9,8 @@ public class EmailService {
         try(var service = new KafkaService(EmailService.class.getSimpleName(),
                 "ECOMMERCE_SEND_EMAIL",
                 //USANDO METHOD REFERENCE
-                emailService::parse)) {
+                emailService::parse,
+                String.class)) {
 
                 //USANDO LAMBDA
                 //c -> emailService.parse(c))){ //doc sobre method reference: https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html
